@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nairteok - {{q}}</title>
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+</head>
+<body>
+   <main class="container">
+    <hgroup>
+      <h1 style="margin-bottom: 0rem;">Nairteok</h1>
+    <h5 style="margin-bottom: 0.5rem; color: white;">Greate job explorer</h5>
+    </hgroup>
+    <form action="/search">
+    <input type="text" name="q" placeholder="What job do you want?" 
+autocomplete="off" list="lang" required>
+      <button type="submit">Search</button>
+    </form>
+  <hgroup>
+    <h2>Result for "{{q}}"</h2>
+    <a href="/downloads?q={{q}}" target="_blank">download to csv</a>
+  </hgroup>
+  <table role="grid">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Company</th>
+      	<th scope="col">Position</th>
+        <th scope="col">Location</th>
+        <th scope="col">Link</th>
+        <th scope="col">Search in Google</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for job in jobs %}
+    	<tr>
+        <td><img src="{{job['img']}}" style="
+              border-radius: 100%;
+              background-color: white;
+              width: 100%;
+              height: 100%;
+        "></td>
+        <td>{{job['company']}}</td>
+        <td>{{job['position']}}</td>
+        <td>{{job['location']}}</td>
+        <td><a href="{{job['link']}}" target="_blank">Apply now &rarr;</a></td>
+        <td><a href="https://www.google.com/search?q={{job['company']}}&sxsrf=AJOqlzXf9SIrCCSAXV0F714Inou9LVNZVA%3A1677423947518&ei=S3X7Y_qkH8ya-AbD15GQAg&ved=0ahUKEwi69p2Uu7P9AhVMDd4KHcNrBCIQ4dUDCA8&uact=5&oq=Braintrust&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQ6CggAEEcQ1gQQsANKBAhBGABQtARYtARg8QZoAnAAeACAAXmIAXmSAQMwLjGYAQCgAQKgAQHIAQrAAQE&sclient=gws-wiz-serp" target="_blank">Search</a></td>
+    	</tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </main>
+  <datalist id="lang">
+    <option value="python"/>
+    <option value="flask"/>
+    <option value="django"/>
+    <option value="golang"/>
+    <option value="javascript"/>
+    <option value="rust"/>
+    <option value="java"/>
+    <option value="c++"/>
+    <option value="c"/>
+    <option value="c#"/>
+    <option value="ruby"/>
+    <option value="kotlin"/>
+  </datalist>
+</body>
+</html>
